@@ -1,52 +1,59 @@
-/******************Circles********************/
-
+// Circles
 @mixin box-shadow($shadows) {
   -webkit-box-shadow: $shadows;
-    -moz-box-shadow: $shadows;
-    box-shadow: $shadows;
-
+     -moz-box-shadow: $shadows;
+          box-shadow: $shadows;
 }
+
 .circles {
-  margin-left: 115px;
   margin-bottom: 30px;
+  margin-left: 115px;
+
   a {
-    text-decoration: none;
     color: white;
+    text-decoration: none;
   }
+
   .tickets,
   .camera,
   .beer,
   .devices {
-    padding-top: 20px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    text-transform: capitalize;
-    text-align: center;
-    width: 150px;
-    height: 150px;
+    @include box-shadow(0px 2px 3px 2px rgba(0,0,0,.5));
     border-radius: 100px;
-    @include box-shadow(0px 2px 3px 2px rgba(0,0,0,.5));
+    height: 150px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    padding-top: 20px;
+    text-align: center;
+    text-transform: capitalize;
+    width: 150px;
+
     &:hover {
-    position: relative;
-    top: -10px;
-    @include box-shadow(0px 2px 3px 2px rgba(0,0,0,.5));
+      @include box-shadow(0px 2px 3px 2px rgba(0,0,0,.5));
+      position: relative;
+      top: -10px;
     }
   }
+
   .tickets {
     background: #4eb9f4;
   }
+
   .camera {
     background: #6fc125;
   }
+
   .beer {
     background: #ff5649;
+
     img {
       width: 76px;
       height: 76px;
     }
   }
+
   .devices {
     background: #e48f23;
   }
 }
-/***********************end circles*****************/
+

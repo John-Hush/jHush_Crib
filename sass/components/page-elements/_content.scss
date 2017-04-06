@@ -1,32 +1,35 @@
-/**********************Content******************/
+// Content
 .article-field {
-          margin-bottom: 40px;
+  margin-bottom: 40px;
+
   .image-field {
+
     img {
       float: left;
-      margin-right: 10px;
       margin-bottom: 10px;
-      }
+      margin-right: 10px;
     }
-  .title-field {
-    h3 {
-      cursor: pointer;
-      margin-bottom: 30px;
-      text-indent: 20px;
-      }
-    }
+  }
+
+  .title-field h3 {
+    cursor: pointer;
+    margin-bottom: 30px;
+    text-indent: 20px;
+  }
+
   .text-field {
+
     &:after {
+      clear: both;
       content: '.';
       display: block;
-      visibility: hidden;
       height: 0px;
-      clear: both;
+      visibility: hidden;
     }
+
     p {
-      text-indent: 20px;
       text-align: justify;
+      text-indent: 20px;
     }
   }
 }
-/************end content***********************/

@@ -1,55 +1,64 @@
-/***************Social***************/
+// Social
 .social {
+
   .social-wrapper {
     float: right;
+
     .social-container {
       display: inline-block;
-      margin-top: 60px;
       margin-bottom: 30px;
+      margin-top: 60px;
+
       .facebook,
       .twitter,
       .dribbble,
       .share {
-        width: 52px;
-        height: 52px;
+        -webkit-box-shadow: 2px 0px 2px 0px rgba(0,0,0,0.5);
+           -moz-box-shadow: 2px 0px 2px 0px rgba(0,0,0,0.5);
+            box-shadow: 2px 0px 2px 0px rgba(0,0,0,0.5);
         background: #696b6a;
         border-radius: 50%;
+        height: 52px;
         margin-left: 25px;
-        -webkit-box-shadow: 2px 0px 2px 0px rgba(0,0,0,0.5);
-        -moz-box-shadow: 2px 0px 2px 0px rgba(0,0,0,0.5);
-        box-shadow: 2px 0px 2px 0px rgba(0,0,0,0.5);
+        width: 52px;
       }
-        .facebook {
-          background-image: url(../images/facebook.png);
-          &:hover {
-            background-image: url(../images/facebook-hover.png);
-            }
-          }
-         .twitter {
-          background-image: url(../images/twitter.png);
-          &:hover {
-            background-image: url(../images/twitter-hover.png);
-          }
+      .facebook {
+        background-image: url(../images/facebook.png);
+
+        &:hover {
+          background-image: url(../images/facebook-hover.png);
         }
-          .dribbble {
-            background-image: url(../images/dribbble.png);
-            &:hover {
-              background-image: url(../images/dribbble-hover.png);
-            }
-          }
-          .share {
-            background-image: url(../images/share.png);
-            &:hover {
-              background-image: url(../images/share-hover.png);
-            }
-          }
+      }
+
+     .twitter {
+        background-image: url(../images/twitter.png);
+
+        &:hover {
+          background-image: url(../images/twitter-hover.png);
         }
-      p {
-        color:  #aeaeae;
-        font-size: 15px;
-        margin-left: 30px;
-        text-align: center;
+      }
+
+      .dribbble {
+        background-image: url(../images/dribbble.png);
+        &:hover {
+          background-image: url(../images/dribbble-hover.png);
+        }
+      }
+
+      .share {
+        background-image: url(../images/share.png);
+
+        &:hover {
+          background-image: url(../images/share-hover.png);
+        }
       }
     }
+
+    p {
+      color: #aeaeae;
+      font-size: 15px;
+      margin-left: 30px;
+      text-align: center;
+    }
   }
-/********************end social**********************/
+}

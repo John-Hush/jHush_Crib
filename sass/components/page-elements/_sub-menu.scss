@@ -1,39 +1,43 @@
-/************Sub menu********/
+// Sub menu
 .sub-menu {
   float: left;
   margin-top: 10px;
+
   ul {
     list-style-type: none;
-    padding: 0;
     margin-right: 114px;
+    padding: 0;
+
     &:last-child {
-    margin-right: 92px;
+      margin-right: 92px;
     }
   }
+
   a {
+    color: #aeaeae;
     display: block;
-    color:  #aeaeae;
     font-size: 15px;
     font-weight: normal;
     line-height: 26px;
     text-align: left;
-    text-indent: 5px;
     text-decoration: none;
+    text-indent: 5px;
+
     &:last-child {
       margin-bottom: 20px;
     }
   }
+
   h4 {
-    color:  #aeaeae;
+    color: #aeaeae;
     font-size: 22px;
   }
+
   &:after {
+    clear: both;
     content: '.';
     display: block;
     height: 0px;
     visibility: hidden;
-    clear: both;
   }
 }
-
-/***************end sub menu***************/

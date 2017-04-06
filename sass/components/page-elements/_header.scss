@@ -1,82 +1,100 @@
-/*******Header******/
+// Header
 .offcanvas-left {
   background: rgba(255,255,255,.8);
   border-radius: 0 0 3px 3px;
-  z-index: 1;
-  position: fixed;
   left: 0;
+  position: fixed;
   right: 0;
-/******offcanvas*********/
+  z-index: 1;
+
+  // Offcanvas
   button {
+    background-color: black;
+    color: white;
     margin-left: 15px;
     margin-top: 5px;
-    color: white;
-    background-color: black;
+
     &:hover {
       background: #de6d6e;
     }
   }
+
   .sidebar-offcanvas {
+
     ul {
-      list-style-type: none;
-      margin-top: 10px;
-      margin-right: 0px;
       float: right;
+      list-style-type: none;
+      margin-right: 0px;
+      margin-top: 10px;
     }
+
     li {
       display: inline-block;
       margin-left: 40px;
     }
+
     a {
-      text-decoration: none;
       color: rgba(69, 69, 69, 0.75);
       font-size: 16px;
-      padding: 3px;
       padding-left: 10px;
       padding-right: 10px;
+      padding: 3px;
+      text-decoration: none;
+
       &:hover {
         background: #de6d6e;
         border-radius: 3px;
         color: white;
-        }
-       }
-    #login {
-          background: #de6d6e;
-          border-radius: 3px;
-          color: white;
-          text-decoration: none;
-          img {
-              margin-right: 5px;
-              margin-bottom: 5px;
-            }
-          }
-        }
       }
+    }
+
+    #login {
+      background: #de6d6e;
+      border-radius: 3px;
+      color: white;
+      text-decoration: none;
+
+      img {
+        margin-bottom: 5px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
 .welcome {
   position: relative;
+
   &-text {
+    bottom: 100px;
     position: absolute;
     width: 100%;
-    bottom: 100px;
   }
-  h1,p {
-  text-align: center;
-  color: white;
-  text-transform: uppercase;
-  text-shadow: 0 1px 1px black;
+
+  h1,
+  p {
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 1px black;
+    text-transform: uppercase;
   }
+
   h1 {
     font: bold 48px serif;
   }
+
   p {
     font: bold 20px serif;
   }
 }
+
 .view-slide {
+
   .views-image {
-    max-width: 100%;
     height: 834px;
+    max-width: 100%;
   }
+
   img {
     height: auto;
     min-height: 100%;
@@ -85,29 +103,34 @@
   }
 }
 
-/**************@media*****************/
+// Responsive
 @media screen and (max-width: 767px) {
+
   .offcanvas-right {
     right: 0;
+
+    .sidebar-offcanvas {
+      right: -50%;
+    }
+
+    &.active {
+      right: 50%;
+    }
   }
+
   .offcanvas-left {
     left: 0;
-  }
-  .offcanvas-right
-  .sidebar-offcanvas {
-    right: -50%;
-  }
-  .offcanvas-left
-  .sidebar-offcanvas {
-    left: -100%;
-  }
-  .offcanvas-left  .sidebar-offcanvas.active {
-    left: 0%;
-  }
-  .offcanvas-right.active {
-    right: 50%;
-  }
-  .offcanvas-left.active {
-    left: 50%;
+
+    .sidebar-offcanvas.active {
+      left: 0;
+    }
+
+    .sidebar-offcanvas {
+      left: -100%;
+    }
+
+    &.active {
+      left: 50%;
+    }
   }
 }
