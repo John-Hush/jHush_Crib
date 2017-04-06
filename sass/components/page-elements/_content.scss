@@ -1,0 +1,32 @@
+/**********************Content******************/
+.article-field {
+          margin-bottom: 40px;
+  .image-field {
+    img {
+      float: left;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      }
+    }
+  .title-field {
+    h3 {
+      cursor: pointer;
+      margin-bottom: 30px;
+      text-indent: 20px;
+      }
+    }
+  .text-field {
+    &:after {
+      content: '.';
+      display: block;
+      visibility: hidden;
+      height: 0px;
+      clear: both;
+    }
+    p {
+      text-indent: 20px;
+      text-align: justify;
+    }
+  }
+}
+/************end content***********************/

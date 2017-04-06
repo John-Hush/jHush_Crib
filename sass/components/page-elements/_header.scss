@@ -1,0 +1,113 @@
+/*******Header******/
+.offcanvas-left {
+  background: rgba(255,255,255,.8);
+  border-radius: 0 0 3px 3px;
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  right: 0;
+/******offcanvas*********/
+  button {
+    margin-left: 15px;
+    margin-top: 5px;
+    color: white;
+    background-color: black;
+    &:hover {
+      background: #de6d6e;
+    }
+  }
+  .sidebar-offcanvas {
+    ul {
+      list-style-type: none;
+      margin-top: 10px;
+      margin-right: 0px;
+      float: right;
+    }
+    li {
+      display: inline-block;
+      margin-left: 40px;
+    }
+    a {
+      text-decoration: none;
+      color: rgba(69, 69, 69, 0.75);
+      font-size: 16px;
+      padding: 3px;
+      padding-left: 10px;
+      padding-right: 10px;
+      &:hover {
+        background: #de6d6e;
+        border-radius: 3px;
+        color: white;
+        }
+       }
+    #login {
+          background: #de6d6e;
+          border-radius: 3px;
+          color: white;
+          text-decoration: none;
+          img {
+              margin-right: 5px;
+              margin-bottom: 5px;
+            }
+          }
+        }
+      }
+.welcome {
+  position: relative;
+  &-text {
+    position: absolute;
+    width: 100%;
+    bottom: 100px;
+  }
+  h1,p {
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px black;
+  }
+  h1 {
+    font: bold 48px serif;
+  }
+  p {
+    font: bold 20px serif;
+  }
+}
+.view-slide {
+  .views-image {
+    max-width: 100%;
+    height: 834px;
+  }
+  img {
+    height: auto;
+    min-height: 100%;
+    min-width: 100%;
+    width: auto;
+  }
+}
+
+/**************@media*****************/
+@media screen and (max-width: 767px) {
+  .offcanvas-right {
+    right: 0;
+  }
+  .offcanvas-left {
+    left: 0;
+  }
+  .offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%;
+  }
+  .offcanvas-left
+  .sidebar-offcanvas {
+    left: -100%;
+  }
+  .offcanvas-left  .sidebar-offcanvas.active {
+    left: 0%;
+  }
+  .offcanvas-right.active {
+    right: 50%;
+  }
+  .offcanvas-left.active {
+    left: 50%;
+  }
+}
