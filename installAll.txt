@@ -1,0 +1,151 @@
+<<<Установка и настройка Apache, MySQL и PHP>>>
+
+Чтобы установить Apache в терминале, необходимо прописать команду:
+  sudo apt-get install apache2
+
+MySQL сервер в терминал вводим команду:
+  sudo apt-get install mysql-server mysql-client
+
+PHP для этого используем команду:
+  sudo apt-get install php5 php5-mysql php5-gd
+
+
+
+Настраиваем Апач
+Здесь все просто, пишем команду:
+   sudo nano /etc/apache2/apache2.conf
+
+чтобы отредактировать файл с правами администратора. В самом начале файла дописываем строчку:
+   ServerName localhost
+   
+   
+“Чистые” ссылки (Clean URLs)
+
+Обязательно нужно включить чистые ссылки (Clean URLs) для Друпала. Для этого отредактируем файл конфигураций хостов командой:
+
+  sudo nano /etc/apache2/sites-avaliable/default
+
+Почти в самом начале файла будет блок настроек:
+
+   <Directory /var/www/>
+
+   Options Indexes FollowSymLinks MultiViews
+
+   AllowOverride None
+
+   Order allow,deny
+
+   allow from all
+
+   </Directory>
+
+Вместо “AllowOverride None” нужно написать “AllowOverride All” и сохраняйте файл.
+
+
+Дальше, включаем специальный модуль для чистых ссылок (mod rewrite), с помощью команды:
+   sudo a2enmod rewrite
+
+И перезагружаем веб-сервер:
+   sudo /etc/init.d/apache2 restart
+
+Для установки PHPMyAdmin напишите команду:
+
+sudo apt-get install phpmyadmin
+
+Дальше необходимо отредактировать файл 
+  sudo nano /etc/apache2/apache2.conf 
+  
+указав в начале файла строку:
+  Include /etc/phpmyadmin/apache.conf
+
+И перезагружаем веб-сервер:
+   sudo /etc/init.d/apache2 restart
+   
+<<<<FINISH>>>>
+
+
+
+<<<<GIT>>>>
+sudo apt-get update
+sudo apt-get install git -y
+
+Настроить Git
+git config --global user.name "Your Name"
+git config --global user.email "youremail@domain.com"
+
+Все заданные настройки конфигурации можно просмотреть при помощи команды:
+git config --list
+<<<FINISH>>>
+
+
+
+<<<<NODEJS>>>
+Node.js v7.x:
+# Using Ubuntu
+curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo apt-get install -y npm
+
+# install dependencies listed in package.json 
+npm install
+
+# install a package and add it to package.json 
+npm install <package> --save
+ 
+# install specific version of a package and add it to package.json 
+npm install <package>#<version> --save
+
+Command for version:
+node -v
+<<<FINISH>>>
+
+
+
+<<<<GULP>>>>
+sudo npm install -g gulp
+
+Install gulp in your project devDependencies:
+npm install --save-dev gulp
+
+If you have problems running gulp, consider nodejs tries to call it from bad location, so you can add:
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+Command for version:
+gulp -v
+<<<FINISH>>>
+
+
+
+<<<<DRUSH>>>>
+php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush;
+php drush --version;
+chmod +x drush ;
+sudo mv drush /usr/local/bin;
+drush init;
+<<<FINISH>>>
+
+
+
+<<<BOWER>>>(if need)
+npm install -g bower
+
+# install dependencies listed in bower.json 
+$ bower install
+ 
+# install a package and add it to bower.json 
+$ bower install <package> --save
+ 
+# install specific version of a package and add it to bower.json 
+$ bower install <package>#<version> --save
+<<<FINISH>>>
+
+
+
+
+
+
+
+
+
+   
+  
