@@ -1,0 +1,94 @@
+<<<@INCLUDE>>>
+              <snippet>
+                <content><![CDATA[@include $0;]]></content>
+                <tabTrigger>inc</tabTrigger>
+                <description>@include</description>
+                <scope>source.scss, source.sass</scope>
+              </snippet>
+<<<FINISH>>>
+
+
+
+<<<REM>>>
+              <snippet>
+                <content><![CDATA[@include rem( font-size, ${1} )]]></content>
+                <tabTrigger>qwe</tabTrigger>
+                <scope>source.scss, source.sass</scope>
+              </snippet>
+<<<FINISH>>>
+
+
+<<<@IMPORT>>>
+              <snippet>
+                <content><![CDATA[@import "$0";]]></content>
+                <tabTrigger>import</tabTrigger>
+                <description>@import</description>
+                <scope>source.scss, source.sass</scope>
+              </snippet>
+<<<FINISH>>>
+
+
+<<<MIXIN>>>
+              <snippet>
+                <content><![CDATA[@mixin $1($2) {$3}$0]]></content>
+                <tabTrigger>mix</tabTrigger>
+                <description>@mixin</description>
+                <scope>source.scss, source.sass</scope>
+              </snippet>
+<<<FINISH>>>
+
+
+<<<ANIMATION>>>
+              <snippet>
+                <content><![CDATA[-webkit-animation: ${1:name} ${2:duration} ${3:ease|linear|ease-in|ease-out|ease-in-out|cubic-bezier(<number>,<number>,<number>,<number>)} ${4:delay} ${5:infinite|<number>} ${6:normal|alternate};
+                 -moz-animation: ${1:name} ${2:duration} ${3:ease|linear|ease-in|ease-out|ease-in-out|cubic-bezier(<number>,<number>,<number>,<number>)} ${4:delay} ${5:infinite|<number>} ${6:normal|alternate};
+                  -ms-animation: ${1:name} ${2:duration} ${3:ease|linear|ease-in|ease-out|ease-in-out|cubic-bezier(<number>,<number>,<number>,<number>)} ${4:delay} ${5:infinite|<number>} ${6:normal|alternate};
+                   -o-animation: ${1:name} ${2:duration} ${3:ease|linear|ease-in|ease-out|ease-in-out|cubic-bezier(<number>,<number>,<number>,<number>)} ${4:delay} ${5:infinite|<number>} ${6:normal|alternate};
+                      animation: ${1:name} ${2:duration} ${3:ease|linear|ease-in|ease-out|ease-in-out|cubic-bezier(<number>,<number>,<number>,<number>)} ${4:delay} ${5:infinite|<number>} ${6:normal|alternate};]]></content>
+                <tabTrigger>ani</tabTrigger>
+                  <description>CSS - animation: ;</description>
+                  <scope>source.css, source.less, source.scss, source.stylus</scope>
+              </snippet>
+<<<FINISH>>>
+
+
+<<<BACKGROUND>>>
+              <snippet>
+                  <content><![CDATA[background: ${1:#fff} url('$2') ${3:0} ${4:0} ${5:repeat|repeat-x|repeat-y|no-repeat|inherit|round|space};]]></content>
+                  <tabTrigger>bac</tabTrigger>
+                  <description>CSS background: #fff url('') 0 0 repeat;</description>
+                  <scope>source.css, source.less, source.scss, source.stylus</scope>
+              </snippet>
+<<<FINISH>>>
+
+
+<<<KEYFRAMES>>>
+            <snippet>
+              <content><![CDATA[
+            @-webkit-keyframes $1 {
+              0% { $2 }
+              100% { $3 }
+            }
+            @-moz-keyframes $1 {
+              0% { $2 }
+              100% { $3 }
+            }
+            @-ms-keyframes $1 {
+              0% { $2 }
+              100% { $3 }
+            }
+            @-o-keyframes $1 {
+              0% { $2 }
+              100% { $3 }
+            }
+            @keyframes $1 {
+              0% { $2 }
+              100% { $3 }
+            }]]></content>
+              <tabTrigger>key</tabTrigger>
+                <description>CSS - @keyframes {}</description>
+                <scope>source.css, source.less, source.scss, source.stylus</scope>
+            </snippet>
+<<<FINISH>>>
+
+
