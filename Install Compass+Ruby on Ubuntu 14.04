@@ -16,3 +16,11 @@ ruby -v
 #http://blog.acrona.com/index.php?post/2014/05/15/Installer-Fondation-et-Compass/sass-sur-Ubuntu-14.04
 gem install compass
 <<<FINISH>>>
+
+<<BUNDLER>>>
+First, update apt-get:
+sudo apt-get update
+
+Install bundler
+gem install bundler
+<<<FINISH>>>
