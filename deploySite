@@ -8,8 +8,6 @@ chmod 755 ./vhost.sh
 
 sudo ./vhost.sh <site-folder-name> <git-repo-url> <branch> (папка - base бо на репо файл назив base.sql репо - git@git.hog.com.ua:root/basedrupal.git бранч довільний)
 
-Обовязково маэ бути закомічекна база (на сервері чи іншій локалці) site-folder-name.sql
-
 Переносимо з сервера sites/default/files
 
 chmod 777 sites/default/files
