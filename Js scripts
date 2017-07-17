@@ -1,0 +1,22 @@
+<<<SMOOTH SCROOL>>>
+  Drupal.behaviors.smoothScroll = {
+    attach: function(context, settings) {
+      var $root = $('html, body');
+      $('.front.page-main .main-header .menu-collapsed li a').click(function() {
+          $root.animate({
+              scrollTop: $( $.attr(this, 'href') ).offset().top -100
+          }, 1500);
+          return false;
+      });
+    }
+  };
+  
+<<<BURGER MENU>>>
+  Drupal.behaviors.burgerMenuHeader = {
+    attach: function(context, settings) {
+     // Menu
+     $(".menu-collapsed").click(function() {
+       $(this).toggleClass("menu-expanded");
+     });
+    }
+  };
