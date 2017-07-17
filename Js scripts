@@ -20,3 +20,27 @@
      });
     }
   };
+
+
+<<<POPUP+overlay with SLIDER slick>>>
+  Drupal.behaviors.sleepPlacesSlider = {
+    attach: function(context, settings) {
+      var $slider  = $('.basic-plane-characteristics-block .field-name-field-img-beds > .field-items', context);
+      var $overlay = $('<div class="sleep-overlay"></div>', context);
+      var $btn     = $('.field-name-field-img-beds .field-label', context);
+      $slider.hide();
+      $btn.click(function() {
+        $overlay.show();
+        $slider.show();
+        $slider.slick({
+          slidesToShow: 1,
+          slidesToScroll: 1
+        });
+      });
+      $overlay.appendTo('.field-name-field-img-beds', context);
+      $overlay.click(function() {
+        $('.field-name-field-img-beds .field-items, .sleep-overlay', context).hide();
+        $slider.slick('unslick');
+      });
+    }
+  };
