@@ -1,0 +1,18 @@
+Usage of container
+
+docker pull skilldlabs/frontend
+
+alias front="docker run --rm -it -v $(pwd):/work -p 3000:3000 -p 3001:3001 skilldlabs/frontend "
+front - simply runs gulp
+front npm update
+front gulp watch
+
+or just for zen 8 theme
+
+docker run --rm -it -v $(pwd):/work -u www-data:www-data skilldlabs/frontend:zen
+
+You can link modules from container
+
+// front npm link gulp gulp-sass
+
+Source at https://github.com/skilld-labs/docker-frontend
