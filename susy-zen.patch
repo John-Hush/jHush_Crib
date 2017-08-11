@@ -1,0 +1,534 @@
+From 7484f6381dc14b6dc4d5ecf503329012f174f990 Mon Sep 17 00:00:00 2001
+From: HOG <hogseruj1@gmail.com>
+Date: Wed, 5 Jul 2017 11:28:55 +0300
+Subject: [PATCH] Removed zen-grid, added susy.
+
+---
+ themes/cpk_theme/components/_init.scss                                |   6 ++++--
+ themes/cpk_theme/components/init/_variables.scss                      |  52 +++++++++-------------------------------------------
+ themes/cpk_theme/components/layouts/layout-3col/_layout-3col.scss     | 162 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ themes/cpk_theme/components/layouts/layout-3col/layout-3col.twig      |  58 ----------------------------------------------------------
+ themes/cpk_theme/components/layouts/layout-center/_layout-center.scss |  64 ----------------------------------------------------------------
+ themes/cpk_theme/components/layouts/layout-center/layout-center.json  |   3 ---
+ themes/cpk_theme/components/layouts/layout-center/layout-center.twig  |   3 ---
+ themes/cpk_theme/components/layouts/layout-swap/_layout-swap.scss     |  31 -------------------------------
+ themes/cpk_theme/components/layouts/layout-swap/layout-swap.twig      |   4 ----
+ themes/cpk_theme/components/layouts/layouts.scss                      |   6 +-----
+ themes/cpk_theme/components/style-guide/kss-only.scss                 |  10 ----------
+ themes/cpk_theme/package.json                                         |   4 ++--
+ 12 files changed, 16 insertions(+), 387 deletions(-)
+ delete mode 100644 themes/cpk_theme/components/layouts/layout-3col/_layout-3col.scss
+ delete mode 100644 themes/cpk_theme/components/layouts/layout-3col/layout-3col.twig
+ delete mode 100644 themes/cpk_theme/components/layouts/layout-center/_layout-center.scss
+ delete mode 100644 themes/cpk_theme/components/layouts/layout-center/layout-center.json
+ delete mode 100644 themes/cpk_theme/components/layouts/layout-center/layout-center.twig
+ delete mode 100644 themes/cpk_theme/components/layouts/layout-swap/_layout-swap.scss
+ delete mode 100644 themes/cpk_theme/components/layouts/layout-swap/layout-swap.twig
+
+diff --git a/themes/cpk_theme/components/_init.scss b/themes/cpk_theme/components/_init.scss
+index e9b5e40..6de312e 100644
+--- a/themes/cpk_theme/components/_init.scss
++++ b/themes/cpk_theme/components/_init.scss
+@@ -28,6 +28,10 @@
+ @import 'breakpoint-sass';
+ @import 'chroma-sass/sass/chroma/functions';
+ 
++// Add susy grid system.
++@import 'susy';
++
++
+ @import 'init/colors';
+ @import 'init/variables';
+ 
+@@ -52,8 +56,6 @@
+ @import 'support-for';
+ // Add typey to manage font sizes and margins.
+ @import 'typey';
+-// Add the Zen Grids responsive layout mixins.
+-@import 'zen-grids';
+ 
+ 
+ // Mixins
+diff --git a/themes/cpk_theme/components/init/_variables.scss b/themes/cpk_theme/components/init/_variables.scss
+index e0144ab..f8c002c 100644
+--- a/themes/cpk_theme/components/init/_variables.scss
++++ b/themes/cpk_theme/components/init/_variables.scss
+@@ -123,53 +123,19 @@ $rem-fallback:      false;
+ //
+ // Style guide: sass.variables.breakpoints
+ 
+-@include add-breakpoint(xxxs, (333px, 'no-query' true));
+-@include add-breakpoint(xxs,  (444px, 'no-query' true));
+-@include add-breakpoint(xs,   (555px, 'no-query' true));
+-@include add-breakpoint(s,    (666px, 'no-query' true));
+-@include add-breakpoint(m,    (777px, 'no-query' true));
+-@include add-breakpoint(l,    (888px, 'no-query' true));
+-@include add-breakpoint(xl,   (999px, 'no-query' true));
+-@include add-breakpoint(xxl,  (1111px));
+-@include add-breakpoint(xxxl, (1222px));
++@include add-breakpoint(mobile,    (640px, 'no-query' true));
++@include add-breakpoint(tablet,    (641px, 'no-query' true));
++@include add-breakpoint(desktop,   (1025px, 'no-query' true));
++
+ 
+ // Output media queries where the above px are converted to ems.
+ // @include breakpoint-set('to ems', true);
+ 
+-
+-// Zen grids
+-//
+-// The default grid system is built using the Zen Grids sass module. Full
+-// documentation is available on the [Zen Grids website](http://zengrids.com/).
+-//
+-// Note: if you are more comfortable using another grid system, you can easily
+-// remove Zen Grids and its layouts.
+-//
+-// Style guide: sass.variables.zen-grids
+-
+-// These are needed for all breakpoints on all layouts.
+-$zen-auto-include-grid-item-base: false;
+-$zen-box-sizing: universal-border-box;
+-
+-// First we set the values we need for the mobile version of our layouts (the
+-// version that does _not_ appear inside any @media queries.)
+-$zen-columns: 1;
+-$zen-gutters: 40px;
+-
+-// Then we set the values we need for each of the layouts at larger media query
+-// sizes. Note how the names of the layouts match the names of our breakpoints
+-// above. That allows a single zen-respond-to() to both use the proper item
+-// from $zen-layouts and from $breakpoints.
+-$zen-layouts: (
+-  m: (
+-    columns: 2,
+-    // The gutters in the layouts are larger on mobile.
+-    gutters: 25px,
+-  ),
+-  xl: (
+-    columns: 3,
+-    gutters: 25px,
+-  ),
++// Susy settings.
++$susy: (
++  columns: 12,
++  gutters: .25,
++  math: fluid,
+ );
+ 
+ // See $include-rtl below.
+diff --git a/themes/cpk_theme/components/layouts/layout-3col/_layout-3col.scss b/themes/cpk_theme/components/layouts/layout-3col/_layout-3col.scss
+deleted file mode 100644
+index 4206e6f..0000000
+--- a/themes/cpk_theme/components/layouts/layout-3col/_layout-3col.scss
++++ /dev/null
+@@ -1,162 +0,0 @@
+-// Responsive 3-column grid
+-//
+-// The `.layout-3col` layout is a responsive grid layout that is:
+-// - 1 column at mobile sizes
+-// - 2 columns at tablet sizes
+-// - 3 columns at desktop sizes
+-//
+-// The `.layout-3col` class is used on the container div for the layout. A *grid
+-// item* in the container can be created using one of the following classes:
+-//
+-// - `.layout-3col__full` : 3-column wide grid item; starts a new row
+-// - `.layout-3col__left-content` : 2-column wide grid item, spanning columns 1
+-//   and 2; starts a new row
+-// - `.layout-3col__right-content` : 2-column wide grid item, spanning columns 2
+-//   and 3; starts a new row
+-// - `.layout-3col__left-sidebar` : 1-column wide grid item spanning column 1;
+-//   starts a new row on tablet screens
+-// - `.layout-3col__first-left-sidebar` : 1-column wide grid item spanning column 1;
+-//   spans column 1 and starts a new row on tablet screens only
+-// - `.layout-3col__second-left-sidebar` : 1-column wide grid item spanning column 1;
+-//   spans column 2 on tablet screens only
+-// - `.layout-3col__right-sidebar` : 1-column wide grid item spanning column 3;
+-//   starts a new row on tablet screens
+-// - `.layout-3col__col-1` : 1-column wide grid item spanning column 1; starts a
+-//   new row
+-// - `.layout-3col__col-2` : 1-column wide grid item spanning column 2
+-// - `.layout-3col__col-3` : 1-column wide grid item spanning column 3; starts a
+-//   new row on tablet screens
+-// - `.layout-3col__col-4` : At tablet sizes, the `__col-x` grid items will form
+-//   an irregular layout of 2 items in the first row and 1 item in the second
+-//   row. The `__col-4` is a "hidden" item that does not appear on the
+-//   large-screen 3-column grid, but is a 1-column wide grid item spanning
+-//   column 2 on tablet screens.
+-// - `.layout-3col__col-x` : 1-column wide grid item spanning column 1; when
+-//   several of these are used inside a `.layout-3col__grid-item-container` or
+-//   `.layout-3col`, the first one is positioned like `__col-1`, the
+-//   second like `__col-2`, etc.
+-//
+-// There are 2 ways to do a nested grid:
+-// 1. Place a grid container div inside a grid item. Just apply the normal
+-//    classes to the nested grid container and its grid items.
+-// 2. The grid item's div is also the grid container for the nested grid. In
+-//    this case, the `.layout3-col__grid-item-container` class should be added
+-//    to the div to ensure its nested grid items align with the parent grid.
+-//
+-// Markup: layout-3col.twig
+-//
+-// Style guide: layouts.layout-3col
+-
+-.layout-3col,
+-%layout-3col {
+-  // We set the context to flow, so that this container can be used in most
+-  // places in the HTML, i.e. it must be nested inside something that has
+-  // padding.
+-  @include zen-grid-container($context: flow);
+-
+-  &__full,
+-  &__left-content,
+-  &__right-content,
+-  &__left-sidebar,
+-  &__right-sidebar,
+-  &__first-left-sidebar,
+-  &__second-left-sidebar,
+-  &__col-1,
+-  &__col-2,
+-  &__col-3,
+-  &__col-4,
+-  &__col-x {
+-    @include zen-new-row(both);
+-    @include zen-grid-item-base();
+-    @include zen-grid-item(1, 1);
+-  }
+-
+-  @include zen-respond-to(m) {
+-    // Since our container's context is "flow" and we changed the gutter size,
+-    // we need to re-apply the container's negative left/right margins.
+-    @include zen-grid-container($context: flow);
+-
+-    &__full,
+-    &__left-content,
+-    &__right-content,
+-    &__left-sidebar,
+-    &__right-sidebar {
+-      @include zen-grid-item(2, 1);
+-      // Since we changed the gutter size for this media query, we need to
+-      // re-apply the padding to every grid item.
+-      @include zen-apply-gutter-padding();
+-    }
+-
+-    &__first-left-sidebar,
+-    &__col-1,
+-    &__col-3,
+-    &__col-x:nth-child(2n + 1) {
+-      @include zen-grid-item(1, 1);
+-      @include zen-apply-gutter-padding();
+-    }
+-
+-    &__second-left-sidebar,
+-    &__col-2,
+-    &__col-4,
+-    &__col-x:nth-child(2n) {
+-      // Since this inherits from the mobile layout, we have to explicitly turn
+-      // off the new-row mixin.
+-      @include zen-new-row(none);
+-      @include zen-grid-item(1, 2);
+-      @include zen-apply-gutter-padding();
+-    }
+-  }
+-
+-  @include zen-respond-to(xl) {
+-    &__full {
+-      @include zen-grid-item(3, 1);
+-    }
+-
+-    &__left-content {
+-      @include zen-grid-item(2, 1);
+-    }
+-
+-    &__right-content {
+-      @include zen-grid-item(2, 2);
+-    }
+-
+-    &__left-sidebar,
+-    &__first-left-sidebar,
+-    &__second-left-sidebar {
+-      @include zen-new-row(right);
+-      @include zen-grid-item(1, 3, right);
+-    }
+-
+-    &__right-sidebar {
+-      @include zen-new-row(right);
+-      @include zen-grid-item(1, 1, right);
+-    }
+-
+-    &__col-1,
+-    &__col-x:nth-child(3n+1) {
+-      @include zen-new-row(both);
+-      @include zen-grid-item(1, 1);
+-    }
+-
+-    &__col-2,
+-    &__col-x:nth-child(3n+2) {
+-      @include zen-new-row(none);
+-      @include zen-grid-item(1, 2);
+-    }
+-
+-    &__col-3,
+-    &__col-x:nth-child(3n) {
+-      @include zen-new-row(none);
+-      @include zen-grid-item(1, 3);
+-    }
+-
+-    &__col-4 {
+-      display: none;
+-    }
+-  }
+-
+-  // Place last so it can override the padding of grid items.
+-  &__grid-item-container {
+-    @include zen-grid-container($context: grid-item);
+-  }
+-}
+diff --git a/themes/cpk_theme/components/layouts/layout-3col/layout-3col.twig b/themes/cpk_theme/components/layouts/layout-3col/layout-3col.twig
+deleted file mode 100644
+index 5c90ce7..0000000
+--- a/themes/cpk_theme/components/layouts/layout-3col/layout-3col.twig
++++ /dev/null
+@@ -1,58 +0,0 @@
+-<div class="layout-3col {{modifier_class}}">
+-  <div class="layout-3col__full">
+-    The <code>.layout-3col__full</code> grid item.
+-  </div>
+-  <div class="layout-3col__left-content">
+-    The <code>.layout-3col__left-content</code> grid item.
+-  </div>
+-  <div class="layout-3col__right-sidebar">
+-    The <code>.layout-3col__right-sidebar</code> grid item.
+-  </div>
+-  <div class="layout-3col__right-content">
+-    The <code>.layout-3col__right-content</code> grid item.
+-  </div>
+-  <div class="layout-3col__left-sidebar">
+-    The <code>.layout-3col__left-sidebar</code> grid item.
+-  </div>
+-  <div class="layout-3col__right-content">
+-    The <code>.layout-3col__right-content</code> grid item.
+-  </div>
+-  <div class="layout-3col__first-left-sidebar">
+-    The <code>.layout-3col__first-left-sidebar</code> grid item.
+-  </div>
+-  <div class="layout-3col__second-left-sidebar">
+-    The <code>.layout-3col__second-left-sidebar</code> grid item.
+-  </div>
+-  <div class="layout-3col__col-1">
+-    The <code>.layout-3col__col-1</code> grid item.
+-  </div>
+-  <div class="layout-3col__col-2">
+-    The <code>.layout-3col__col-2</code> grid item.
+-  </div>
+-  <div class="layout-3col__col-3">
+-    The <code>.layout-3col__col-3</code> grid item. Don't forget to look for the <code>.layout-3col__col-4</code> grid item at tablet sizes.
+-  </div>
+-  <div class="layout-3col__col-4">
+-    The <code>.layout-3col__col-4</code> grid item.
+-  </div>
+-  <div class="layout-3col__full layout-3col__grid-item-container">
+-    <div class="layout-3col__col-x">
+-      The first <code>.layout-3col__col-x</code> grid item in this nested grid.
+-    </div>
+-    <div class="layout-3col__col-x">
+-      The second <code>.layout-3col__col-x</code> grid item in this nested grid.
+-    </div>
+-    <div class="layout-3col__col-x">
+-      The third <code>.layout-3col__col-x</code> grid item in this nested grid.
+-    </div>
+-    <div class="layout-3col__col-x">
+-      The fourth <code>.layout-3col__col-x</code> grid item in this nested grid.
+-    </div>
+-    <div class="layout-3col__col-x">
+-      The fifth <code>.layout-3col__col-x</code> grid item in this nested grid.
+-    </div>
+-    <div class="layout-3col__col-x">
+-      The sixth <code>.layout-3col__col-x</code> grid item in this nested grid.
+-    </div>
+-  </div>
+-</div>
+diff --git a/themes/cpk_theme/components/layouts/layout-center/_layout-center.scss b/themes/cpk_theme/components/layouts/layout-center/_layout-center.scss
+deleted file mode 100644
+index 846a321..0000000
+--- a/themes/cpk_theme/components/layouts/layout-center/_layout-center.scss
++++ /dev/null
+@@ -1,64 +0,0 @@
+-// Dependencies.
+-// Allow layout-center's margin/padding to override layout-3col.
+-@import 'layouts/layout-3col/layout-3col';
+-
+-// Layout Center
+-//
+-// All other layouts should be nested inside this centered layout to ensure that
+-// content does not get too wide on very large screens.
+-//
+-// Applying a `.layout-*` class to the same HTML element as `.layout-center`
+-// would cause that element's grid to mis-align with the rest of the grid on the
+-// page, but this component will automatically detect the other `.layout-*`
+-// class and automatically use the `.layout-center--shared-grid` variant
+-// instead.
+-//
+-// .layout-center--shared-grid - If `.layout-center` is applied to the same div
+-//   as another .layout-* class, then this variant should be used to prevent the
+-//   shared layout's grid from mis-aligning. Note: Each time a new .layout-*
+-//   component is created, this component will need to be modified.
+-//
+-// Markup: layout-center.twig
+-//
+-// Weight: -1
+-//
+-// Style guide: layouts.layout-center
+-
+-.layout-center,
+-%layout-center {
+-  @include zen-apply-gutter-padding();
+-  margin: 0 auto;
+-
+-  // We wrap the max-width declaration with zen-layout() so we can see the value
+-  // of $zen-gutters when it is at the larger "xl"-sized media query.
+-  @include zen-layout(xl) {
+-    // The max content width is 1140px (the container width minus the gutters.)
+-    max-width: 1140px + $zen-gutters;
+-  }
+-
+-  @include zen-respond-to(m) {
+-    // Since we are using zen-respond-to(), the values in $zen-layouts will
+-    // override the global value for $zen-gutters.
+-    @include zen-apply-gutter-padding();
+-  }
+-
+-  // Since .layout-center has overridden the negative margin on another
+-  // .layout-* container, the grid cpk_theme will be misaligned due to
+-  // .layout-center's gutter padding. So we remove it.
+-  &--shared-grid {
+-    padding-left: 0;
+-    padding-right: 0;
+-  }
+-}
+-
+-//
+-// Fugly selectors.
+-//
+-
+-.layout-center {
+-  // Ensure the .layout-center--shared-grid variant is automatically used by
+-  // adding all other .layout-* classes here.
+-  &.layout-3col {
+-    @extend %layout-center--shared-grid;
+-  }
+-}
+diff --git a/themes/cpk_theme/components/layouts/layout-center/layout-center.json b/themes/cpk_theme/components/layouts/layout-center/layout-center.json
+deleted file mode 100644
+index 52ac132..0000000
+--- a/themes/cpk_theme/components/layouts/layout-center/layout-center.json
++++ /dev/null
+@@ -1,3 +0,0 @@
+-{
+-  "content": "This layout-center component has content that is centered on larger screens."
+-}
+diff --git a/themes/cpk_theme/components/layouts/layout-center/layout-center.twig b/themes/cpk_theme/components/layouts/layout-center/layout-center.twig
+deleted file mode 100644
+index cc71f16..0000000
+--- a/themes/cpk_theme/components/layouts/layout-center/layout-center.twig
++++ /dev/null
+@@ -1,3 +0,0 @@
+-<div class="layout-center {{modifier_class}}">
+-  {{ content }}
+-</div>
+diff --git a/themes/cpk_theme/components/layouts/layout-swap/_layout-swap.scss b/themes/cpk_theme/components/layouts/layout-swap/_layout-swap.scss
+deleted file mode 100644
+index 8d68d5e..0000000
+--- a/themes/cpk_theme/components/layouts/layout-swap/_layout-swap.scss
++++ /dev/null
+@@ -1,31 +0,0 @@
+-// The height of the navigation container.
+-$layout-swap-height: 2 * $base-line-height;
+-
+-// Layout swap
+-//
+-// Uses absolute positioning and selective padding to make 2 elements appear to
+-// swap places in the visual order while maintaining their original HTML source
+-// order.
+-//
+-// Markup: layout-swap.twig
+-//
+-// Style guide: layouts.layout-swap
+-
+-.layout-swap,
+-%layout-swap {
+-  position: relative;
+-
+-  @include respond-to(xs) {
+-    // Move all the cpk_theme down to make room for the "top" element.
+-    padding-top: $layout-swap-height;
+-  }
+-
+-  &__top {
+-    @include respond-to(xs) {
+-      position: absolute;
+-      top: 0;
+-      height: $layout-swap-height;
+-      width: 100%;
+-    }
+-  }
+-}
+diff --git a/themes/cpk_theme/components/layouts/layout-swap/layout-swap.twig b/themes/cpk_theme/components/layouts/layout-swap/layout-swap.twig
+deleted file mode 100644
+index a246ec7..0000000
+--- a/themes/cpk_theme/components/layouts/layout-swap/layout-swap.twig
++++ /dev/null
+@@ -1,4 +0,0 @@
+-<div class="layout-swap">
+-  <div>This element comes <strong>first</strong> in the HTML source order.</div>
+-  <div class="layout-swap__top">This element comes <strong>second</strong> in the HTML source order.</div>
+-</div>
+diff --git a/themes/cpk_theme/components/layouts/layouts.scss b/themes/cpk_theme/components/layouts/layouts.scss
+index 05a4f24..90d9563 100644
+--- a/themes/cpk_theme/components/layouts/layouts.scss
++++ b/themes/cpk_theme/components/layouts/layouts.scss
+@@ -7,8 +7,4 @@
+ //
+ // Style guide: layouts
+ 
+-@import 'layout-3col/layout-3col';
+-@import 'layout-center/layout-center';
+-// The layout-swap isn't used in page.html.twig. You may wish to remove it to
+-// improve front-end performance.
+-@import 'layout-swap/layout-swap';
++// @import 'layout-3col/layout-3col';
+diff --git a/themes/cpk_theme/components/style-guide/kss-only.scss b/themes/cpk_theme/components/style-guide/kss-only.scss
+index 288b653..e31ed13 100644
+--- a/themes/cpk_theme/components/style-guide/kss-only.scss
++++ b/themes/cpk_theme/components/style-guide/kss-only.scss
+@@ -10,13 +10,3 @@
+ [id^='kssref-layouts-'] [class^='layout-'][class*='__'] {
+   outline: 1px dotted color('grey');
+ }
+-
+-// Because our grids assume a container has some padding, add the standard
+-// padding to the example wrapper.
+-#kssref-layouts-layout-3column .kss-modifier__example {
+-  @include zen-apply-gutter-padding();
+-
+-  @include zen-respond-to(m) {
+-    @include zen-apply-gutter-padding();
+-  }
+-}
+diff --git a/themes/cpk_theme/package.json b/themes/cpk_theme/package.json
+index 5869029..e60dd87 100644
+--- a/themes/cpk_theme/package.json
++++ b/themes/cpk_theme/package.json
+@@ -26,8 +26,8 @@
+     "node-sass-import-once": "^1.2.0",
+     "sass-lint": "^1.7.0",
+     "support-for": "^1.0.6",
+-    "typey": "^1.0.0",
+-    "zen-grids": "^2.0.3"
++    "susy": "^2.2.12",
++    "typey": "^1.0.0"
+   },
+   "engines": {
+     "node": ">=4.0.0"
+--
+libgit2 0.25.0
