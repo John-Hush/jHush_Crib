@@ -1,6 +1,9 @@
 1.Open Ubuntu Software Center
-2. Install "winetricks"
+2. Install "winetricks" , logmein-hamachi
 3. download StrongHold crusader from cloud. https://cloud.mail.ru/public/L6Ko/oVvMTfnQp
 4. Extract archive.
 5. Go to StrongholdCrusaderHD / prefix / drive_c / Program Files / Stronghold Crusader HD / Stronghold Crusader.exe
-6. Have fun!
+6. https://help.ubuntu.com/community/Hamachi
+  a. sudo add-apt-repository -y ppa:webupd8team/haguichi
+  b.sudo apt update
+  c.sudo apt install -y haguichi
