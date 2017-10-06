@@ -1,0 +1,37 @@
+  Drupal.behaviors.wrapThreeColumns = {
+    attach: function (context, settings) {
+      this.threeColLayout('.courses-page-with-price .views-row',
+           '.views-field-field-image-courses',
+           '.views-field-nothing, .views-field-variations',
+           '.views-field-field-name, .views-field-field-price, .views-field-field-course-duration, .views-field-body', context);
+    },
+    threeColLayout: function(el, leftCol, rightCol, middleCol, context) {
+      var $el = $(el, context);
+
+      if ($el.length) {
+        for (var i = 0, elCount = $el.length; i < elCount; i++) {
+          var $this = $el.eq(i);
+
+          $this.find(leftCol).wrapAll('<div class="group-left"></div>');
+          $this.find(rightCol).wrapAll('<div class="group-right"></div>');
+          $this.find(middleCol).wrapAll('<div class="group-middle"></div>');
+        }
+      }
+    }
+  };
+  
+ 
+ 
+ 
+    Drupal.behaviors.smoothScroll = {
+    attach: function(context, settings) {
+      var $root = $('html, body');
+      $('.front.page-main .main-header .menu-collapsed li a').click(function() {
+          console.log('working');
+          $root.animate({
+              scrollTop: $( $.attr(this, 'href') ).offset().top -120
+          }, 1000);
+          return false;
+      });
+    }
+  };
