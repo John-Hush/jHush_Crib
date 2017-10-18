@@ -1,0 +1,6 @@
+tar -cvvf sites.tar ./ - за архівувати ./ в тар архів
+tar -xvvf sites.tar - роз архівувати тар архів
+scp /var/www/clients/client1/web264/web/sites.tar u12608@th4.vps-private.net:/home/u12608/domains/lischuk-lider.ru - скопіювати по ssh
+/var/www/clients/client1/web264/web/sites.tar - повний шлях до файлу який копіюється
+
+u12608@th4.vps-private.net:/home/u12608/domains/lischuk-lider.ru - шлях куди копіювати
