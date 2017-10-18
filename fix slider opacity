@@ -1,0 +1,7 @@
+.slider {
+    opacity: 0;
+  }
+
+  .slider.slick-initialized {
+    opacity: 1;
+  }
