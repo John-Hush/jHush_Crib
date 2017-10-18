@@ -35,3 +35,32 @@
       });
     }
   };
+  
+  
+      Drupal.behaviors.sliderSlick = {
+    attach: function (context, settings) {
+      var opt = [
+        {
+          slider: $('.field-name-field-section-homepage > .field-items'),
+          options: {
+                  adaptiveHeight: true,
+                  dots: true,
+                  infinite: true,
+                  arrows: true,
+                  speed: 300,
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  fade: true,
+                  cssEase: 'linear'
+                  }
+        }
+      ];
+
+      for (var i = 0; i < opt.length; i++) {
+        this.initialize(opt[i].slider, opt[i].options);
+      }
+    },
+    initialize: function (slider, options, context) {
+      $(slider, context).slick(options);
+    }
+  };
