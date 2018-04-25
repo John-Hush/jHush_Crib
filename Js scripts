@@ -44,3 +44,56 @@
       });
     }
   };
+
+//SLICKNAV
+  Drupal.behaviors.slickNavMenu = {
+    attach: function (context, settings) {
+      this.slickNav('.menu_nav .menu-block-wrapper > .menu', context);
+      this.addClass('.slicknav_menu', '.slicknav_btn', context);
+      this.addClass('.page-wrapper', '.slicknav_btn', context);
+    },
+    slickNav: function (el, context) {
+      $(el, context).slicknav({
+        prependTo: '.header .region-header-top',
+        label: (''),
+      });
+
+        var windowWidth = $(window).width();
+        if (windowWidth > 1199) {
+          $('.slicknav_menu', context).addClass('open');
+          $('.slicknav_btn', context).removeClass('slicknav_collapsed').addClass('slicknav_open');
+          $('.slicknav_nav', context).show();
+          $('.slicknav_btn', context).click(function() {
+            $('.slicknav_nav', context).toggle();
+          });
+        }
+
+      $(window).resize(function() {
+        var windowWidth = $(window).width();
+        if (windowWidth > 1199) {
+          $('.slicknav_menu', context).addClass('open');
+          $('.slicknav_btn', context).removeClass('slicknav_collapsed').addClass('slicknav_open');
+          $('.slicknav_nav', context).toggle();
+          $('.slicknav_menu', context).appendTo('.region-header-bot', context);
+        } else {
+          $('.slicknav_menu', context).appendTo('.region-header-top', context);
+        }
+      });
+
+    },
+    addClass: function (menu , btn ,context) {
+      var closeBtn = $('<a class="slick-close-custom"></a>');
+      closeBtn.appendTo(menu, context);
+       $(closeBtn, context).click(function(){
+        $(btn, context).click();
+       });
+
+      $(btn, context).click(function(){
+        $(btn, context).hasClass('slicknav_open') ? $(menu, context).addClass('open').removeClass('closed') : $(menu, context).addClass('closed').removeClass('open');
+      });
+
+      $(btn, context).click(function(){
+        $(btn, context).hasClass('slicknav_collapsed') ? $(menu, context).addClass('closed').removeClass('open') : $(menu, context).addClass('open').removeClass('closed');
+      });
+    }
+  };
