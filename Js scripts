@@ -21,6 +21,30 @@
     }
   };
 
+//
+//  Drupal.behaviors.ctoolsChoosen = {
+//    attach: function (context, settings) {
+//      this.ctoolsChoosenFunc('.default-ctools-popup .chosen-container-single .chosen-single',
+//                             '.default-ctools-popup .chosen-container .chosen-results li',
+//                             '.default-ctools-popup .chosen-container-single', context)
+//    },
+//    ctoolsChoosenFunc: function (el, drop, wrapper, context) {
+//      $( document, context ).ajaxStop(function() {
+//        $(el, context).click(function() {
+//          var $that = $(this);
+//
+//          $that.parent($(wrapper, context)).toggleClass('drop-open');
+//
+//          $(drop, context).click(function() {
+//            var $that = $(this);
+//
+//            $that.closest($(wrapper, context)).removeClass('drop-open');
+//          });
+//        });
+//      });
+//    }
+//  };
+
 
 <<<POPUP+overlay with SLIDER slick>>>
   Drupal.behaviors.sleepPlacesSlider = {
