@@ -1,3 +1,19 @@
+<<<BOttom right offset >>>
+    var link=$("#result");
+
+    var top = link.offset().top; // position from $(document).offset().top
+    var bottom = top + link.height(); // position from $(document).offset().top
+
+    var left = link.offset().left; // position from $(document).offset().left
+    var right = left + link.width(); // position from $(document).offset().left
+
+    var bottomFromBottom = $(document).height() - bottom;
+    // distance from document's bottom
+    var rightFromRight = $(document).width() - right;
+    // distance from document's right
+    
+    
+
 <<<SMOOTH SCROOL>>>
   Drupal.behaviors.smoothScroll = {
     attach: function(context, settings) {
