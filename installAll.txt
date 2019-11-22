@@ -3,8 +3,8 @@
 Чтобы установить Apache в терминале, необходимо прописать команду:
   sudo apt-get install apache2
 
-MySQL сервер в терминал вводим команду:
-  sudo apt-get install mysql-server mysql-client
+MySQL:
+https://www.digitalocean.com/community/tutorials/mysql-ubuntu-18-04-ru
 
 PHP для этого используем команду:
   sudo apt-get install php5 php5-mysql php5-gd
