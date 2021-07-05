@@ -1,2 +1,4 @@
 //Mysql
 https://gist.github.com/spalladino/6d981f7b33f6e0afe6bb
+EXAMPLE
+cat backup-friday.sql | docker exec -i dfn_start_mariadb /usr/bin/mysql -u root --password=password drupal
